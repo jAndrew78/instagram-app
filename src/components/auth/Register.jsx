@@ -9,7 +9,7 @@ export default function Register() {
   const onSignUp = () => {}
 
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: 'center' }}>
 
       <TextInput
         placeholder="name"
