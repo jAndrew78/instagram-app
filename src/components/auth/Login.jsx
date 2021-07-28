@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Button, TextInput } from "react-native";
-import firebase from 'firebase';
+// import firebase from 'firebase';
+
+import { FirebaseContext } from '../../context/FirebaseContext';
 
 export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const firebase = useContext(FirebaseContext);
+
   const onSignIn = () => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    try {
+      firebase.logIn(email, password);
+    } catch (error) {
+      console.log("Error @onSignUp: ", error);
+    }
   }
 
   return (

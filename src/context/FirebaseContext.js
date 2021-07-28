@@ -13,6 +13,10 @@ if (!firebase.apps.length) {
 const Firebase = {
   createUser: async (email, password) => {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }, 
+
+  logIn: async (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 };
 

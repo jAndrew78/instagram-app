@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Button, TextInput } from "react-native";
 // import firebase from 'firebase';
 
@@ -8,10 +8,15 @@ export default function Register() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  
   const firebase = useContext(FirebaseContext);
 
   const onSignUp = () => {
-    firebase.createUser(email, password);
+    try {
+      firebase.createUser(email, password);
+    } catch (error) {
+      console.log("Error @onSignUp: ", error);
+    }
   }
 
   return (
