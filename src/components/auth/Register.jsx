@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput } from "react-native";
+import firebase from 'firebase';
 
 export default function Register() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const onSignUp = () => {}
+  const onSignUp = () => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -36,7 +45,7 @@ export default function Register() {
       />
 
       <Button 
-        // onPress={() => onSignUp()}
+        onPress={() => onSignUp()}
         title="Sign Up"
       />
 
