@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput } from "react-native";
-// import firebase from 'firebase';
+import firebase from 'firebase';
 
-import { FirebaseContext } from '../../context/FirebaseContext';
-
-export default function Register() {
-  const [name, setName] = useState();
+export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const firebase = useContext(FirebaseContext);
 
-  const onSignUp = () => {
-    firebase.createUser(email, password);
+  const onSignIn = () => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>
-
-      <TextInput
-        placeholder="name"
-        value={name}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={name => setName(name.trim())}
-      />
       
       <TextInput
         placeholder="email"
@@ -42,8 +36,8 @@ export default function Register() {
       />
 
       <Button 
-        onPress={() => onSignUp()}
-        title="Sign Up"
+        onPress={() => onSignIn()}
+        title="Sign In"
       />
 
     </View>

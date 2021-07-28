@@ -10,7 +10,11 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 
-const Firebase = {};
+const Firebase = {
+  createUser: async (email, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
+};
 
 const FirebaseProvider = props => {
   return <FirebaseContext.Provider value={Firebase}>{props.children}</FirebaseContext.Provider>
